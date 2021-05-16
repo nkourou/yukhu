@@ -1,0 +1,19 @@
+<div *ngIf="(backend.queue$ | async) as queue">
+  <div fxLayout="row" fxLayoutAlign="space-evenly baseline" style="margin: 20px 10px;">
+    <h2 matBadge="{{queue.length}}" matBadgeOverlap="true" matBadgePosition="above" matBadgeSize="medium">Queue</h2>
+    <!-- <h2 mat-subheader>Queue</h2> -->
+    <div fxFlex></div>
+    <button mat-mini-fab matTooltip="Refresh Queue with new data" color="accent" (click)="backend.refreshQueue()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+  <mat-divider></mat-divider>
+  <mat-nav-list>
+    <a mat-list-item [routerLink]="[task.type, task.id]" *ngFor="let task of queue" routerLinkActive="true"> 
+      <!-- <mat-icon mat-list-icon>task</mat-icon> -->
+      <div mat-line>{{task.id}}: {{task.name}}</div>
+      <div mat-line> {{task.date_submitted | date}} </div>
+      <mat-divider></mat-divider>
+    </a>
+  </mat-nav-list>
+</div>

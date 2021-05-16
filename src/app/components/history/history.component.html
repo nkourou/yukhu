@@ -1,0 +1,28 @@
+<div *ngIf="(dataSource$ | async) as dataSource">
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+    
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>#</th>
+            <td mat-cell *matCellDef="let row">{{row.id}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="date_reviewed">
+            <th mat-header-cell *matHeaderCellDef>Date reviewed</th>
+            <td mat-cell *matCellDef="let row">{{row.date_reviewed | date}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef disableClear>Type</th>
+            <td mat-cell *matCellDef="let row">{{row.type}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="question_text">
+            <th mat-header-cell *matHeaderCellDef>Question</th>
+            <td mat-cell *matCellDef="let row">{{row.question_text}}</td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" [routerLink]="['/', element.type, element.id]" class="example-element-row"></tr>
+    </table>
+</div>

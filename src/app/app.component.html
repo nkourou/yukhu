@@ -1,0 +1,75 @@
+
+  
+  <div>
+    <mat-progress-bar mode="indeterminate" style="z-index: 3; position: absolute;" *ngIf="backend.loading$ | async" color="accent"></mat-progress-bar>
+    <mat-toolbar color="primary">
+      <mat-toolbar-row   class="mat-elevation-z6" style="position: fixed; background: #3f51b5; z-index: 2">
+        <div >  
+        <button mat-icon-button  aria-label="Example icon-button with menu icon" (click)="isExpanded=!isExpanded" matTooltip="Open/close queue pane">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <a mat-button routerLink="/home"><h1>IELTSnerd</h1></a>
+        <a mat-button aria-label="Example icon-button with menu icon"  routerLink="/history">
+          Past Reviews
+        </a>
+        <a mat-button routerLink="/guides" aria-label="Example icon-button with menu icon">
+          Guides
+        </a>
+      </div>
+      <div fxFlex></div>
+      <div>  
+        <button mat-icon-button  aria-label="Example icon-button with share icon" [matMenuTriggerFor]="appMenu">
+          <mat-icon>feedback</mat-icon>
+        </button>
+
+        <mat-menu #appMenu="matMenu" yPosition="below" >
+          <mat-form-field appearance="outline" 
+          style="display: block;" (click)="$event.stopPropagation();"
+          >
+            <mat-label>Feedback</mat-label>
+            <textarea matInput (input)="feedback = $event.target.value" [(ngModel)]="feedback" placeholder="Write your feedback here.." rows="10" ></textarea>
+          </mat-form-field>
+          <button mat-raised-button color="primary" [value]="feedback" (click)="saveFeedback($event)" style="margin-left: 5px;">{{feedbackSubmitBtnTxt}}</button>
+          <!-- <mat-divider></mat-divider> -->
+          <!-- <button mat-raised-button (click)="log()">Cancel</button> -->
+        </mat-menu>
+        <button mat-icon-button  aria-label="Example icon-button with share icon" routerLink="/profile">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </div>
+      </mat-toolbar-row>
+  
+      <!-- <mat-toolbar-row style="height: 90px; margin-top: 56px;">
+        <h1 style="font-weight: 300;">Second Line</h1>
+      </mat-toolbar-row> -->
+  </mat-toolbar>
+  </div>
+
+<!-- <div fxLayout="row">
+  <div fxFlex="1 6 15%">
+    <app-queue></app-queue>
+  </div>
+
+  <div fxFlex="3 1 90%">
+    <div fxLayout="row" fxLayoutAlign="space-evenly stretch" style="padding-top: 20px;">
+      <app-ques-ans fxFlex="40%" fxFlexOrder="1"></app-ques-ans>
+      <app-review fxFlex="55%" fxFlexOrder="2"></app-review>
+    </div>
+  </div>
+</div> -->
+<mat-sidenav-container style=" min-height: 100%">
+  <mat-sidenav mode="side" opened="{{isExpanded}}">
+    <app-queue></app-queue>
+  </mat-sidenav>
+
+  <mat-sidenav-content style="padding: 40px 20px">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- 
+<div >
+  <mat-toolbar color="primary" style="height: 200px; position: fixed;  bottom: 0px;">
+    <h1>Footer</h1>
+  </mat-toolbar>
+</div> -->
